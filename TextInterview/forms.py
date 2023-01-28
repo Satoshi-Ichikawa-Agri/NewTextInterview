@@ -15,6 +15,6 @@ class QuestionForm(forms.ModelForm):
     answer = forms.CharField(widget=forms.Textarea(), max_length=4000, label="回答")
 
     class Meta:
-        model = get_user_model()
+        model = Question
         fields = '__all__'
 

@@ -1,14 +1,11 @@
 <!-- questions create.html -->
-{% extends "layout.html" %}
+{% extends 'base.html' %}
 {% load widget_tweaks %}
 
-{% block title %}Create{% endblock %}
-
-{% block content %}
+{% block main %}
 
 <h2>Question登録</h2>
 <hr />
-
 <div class="row">
     <div class="col-md-4">
         <form method="post" action="">
@@ -18,8 +15,8 @@
                 {{ field.label }}: {{ field | add_class:'form-control' }}
             </div>
             {% endfor %}
-            <input class="btn btn-primary mt-3" type="submit" name="Create Question" value="登録">
-            <a class="btn btn-secondary mt-3" href={% url 'textInterviewApp:index' %}>戻る</a>
+            <input class="btn btn-primary mt-3" type="submit" name="CreateQuestion" value="登録">
+            <a class="btn btn-secondary mt-3" href={% url 'index' %}>戻る</a>
         </form>
     </div>
 </div>
