@@ -8,7 +8,9 @@ from TextInterview.views import *
 
 
 urlpatterns = [
-    path('', question_views.home, name='home'),
+    path('', question_views.TopPageView.as_view(), name='home'),
     path('index/', question_views.QuestionIndexView.as_view(), name='index'),
     path('create/', question_views.QuestionCreateView.as_view(), name='create'),
+    path('update/<str:pk>/', question_views.QuestionUpdateView.as_view(), name='update'),
+    path('delete/<str:pk>/', question_views.QuestionDeleteView.as_view(), name='delete'),
 ]

@@ -1,16 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView ,DetailView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, CreateView ,UpdateView, DeleteView
 
 from TextInterview.models import Question
 from TextInterview.forms import QuestionForm
 
 
-def home(request):
-    """ GET
-    Return:
-
+class TopPageView(TemplateView):
     """
-    return render(request, 'pages/home.html')
+    """
+    template_name = 'pages/home.html'
 
 
 class QuestionIndexView(ListView):
@@ -21,9 +19,6 @@ class QuestionIndexView(ListView):
     model = Question
     template_name = 'pages/index.html'
 
-
-class QuestionDetailView(DetailView):
-    pass
 
 
 class QuestionCreateView(CreateView):
@@ -43,4 +38,16 @@ class QuestionCreateView(CreateView):
 class QuestionUpdateView(UpdateView):
     """
     """
-    pass
+    model = Question
+    template_name = 'pages/update.html'
+    fields = ('title', 'question_content', 'answer')
+    success_url = '/index/'
+
+
+class QuestionDeleteView(DeleteView):
+    """
+    """
+    model = Question
+    template_name = 'pages/delete.html'
+    success_url = '/index/'
+

@@ -1,0 +1,16 @@
+<!-- questions delete.html -->
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block main %}
+
+<h2>Delete</h2>
+<hr />
+<p>この質問を削除します。よろしいですか？</p>
+<form method="post" action="">
+    {% csrf_token %}
+    <input class="btn btn-danger mt-3" type="submit" name="Confirm" value="削除">
+    <a class="btn btn-secondary mt-3" href={% url 'index' %}>戻る</a>
+</form>
+
+{% endblock %}
