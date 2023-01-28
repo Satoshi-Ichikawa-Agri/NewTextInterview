@@ -9,24 +9,33 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from pathlib import Path
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 開発環境と本番環境用で権限などを分ける
+env = environ.Env()
+root = environ.Path(BASE_DIR / 'secrets')
+# env.read_env(root('.env.prod')) # 本番環境用
+env.read_env(root('.env.dev')) # 開発環境用
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^x(76@g+v41$d4a0cqz^*t$x8w=$yeu&w3u8a9hoxdb*oku1)%'
+# シークレットフォルダを扱うときに必要
+# 注意：GitHubのような公開の場には見せないこと！！
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'TextInterview', # 追記
 ]
 
 MIDDLEWARE = [
@@ -54,7 +64,7 @@ ROOT_URLCONF = 'TIProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,9 +125,37 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static'] # 追記
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#-- 認証 --
+# スキーマ&ドメイン
+# MY_URL = env.str('MY_URL')
+
+# カスタムユーザーモデル
+# AUTH_USER_MODEL = 'base.User'
+
+# LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_URL = '/logout/'
+# LOGOUT_REDIRECT_URL = '/login/'
+
+#-- 認証ここまで --
+
+
+# messages
+# MESSAGE_TAGS = {
+#     messages.ERROR: 'rounded-0 alert alert-danger',
+#     messages.WARNING: 'rounded-0 alert alert-warning',
+#     messages.SUCCESS: 'rounded-0 alert alert-success',
+#     messages.INFO: 'rounded-0 alert alert-info',
+#     messages.DEBUG: 'rounded-0 alert alert-secondary',
+# }
+
+# custom_context_processor
+TITLE = 'TextInterview'
