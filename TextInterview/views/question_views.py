@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, CreateView ,UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from TextInterview.models import Question
 from TextInterview.forms import QuestionForm
@@ -11,7 +12,7 @@ class TopPageView(TemplateView):
     template_name = 'pages/home.html'
 
 
-class QuestionIndexView(ListView):
+class QuestionIndexView(LoginRequiredMixin, ListView):
     """ Question一覧
     QuestionテーブルからアイテムListを取得する
     指定が無ければ全データを取得し、「object_list」に格納する。
@@ -21,7 +22,7 @@ class QuestionIndexView(ListView):
 
 
 
-class QuestionCreateView(CreateView):
+class QuestionCreateView(LoginRequiredMixin, CreateView):
     """
     """
     model = Question
@@ -35,7 +36,7 @@ class QuestionCreateView(CreateView):
         return super().form_valid(form)
 
 
-class QuestionUpdateView(UpdateView):
+class QuestionUpdateView(LoginRequiredMixin, UpdateView):
     """
     """
     model = Question
@@ -44,7 +45,7 @@ class QuestionUpdateView(UpdateView):
     success_url = '/index/'
 
 
-class QuestionDeleteView(DeleteView):
+class QuestionDeleteView(LoginRequiredMixin, DeleteView):
     """
     """
     model = Question

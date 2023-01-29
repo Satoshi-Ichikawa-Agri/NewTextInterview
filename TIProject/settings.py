@@ -135,16 +135,14 @@ STATICFILES_DIRS = [BASE_DIR / 'static'] # 追記
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #-- 認証 --
-# スキーマ&ドメイン
-# MY_URL = env.str('MY_URL')
+MY_URL = env.str('MY_URL') # スキーマ&ドメイン
 
-# カスタムユーザーモデル
-# AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'TextInterview.User' # カスタムユーザーモデル
 
-# LOGIN_URL = '/login/'
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_URL = '/logout/'
-# LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 #-- 認証ここまで --
 
