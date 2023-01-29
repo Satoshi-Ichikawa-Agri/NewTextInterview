@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+
+# ここより下は、サトシの指定
+memo.txt
+secrets/
