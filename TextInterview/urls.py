@@ -20,4 +20,6 @@ urlpatterns = [
     path('signup/', account_views.SignUpView.as_view(), name='signup'),
     path('account/', account_views.AccountUpdateView.as_view(), name='account'),
     path('personalInfo/', account_views.PersonalInfoUpdateView.as_view(), name='personalInfo'),
+    path('simIndex/', simulation_views.SimulationIndexView.as_view(), name='simIndex'),
+    path('simulation/', simulation_views.SimulationView.as_view(), name='simulation'),
 ]

@@ -1,0 +1,14 @@
+// フィールド
+$cBlack: black;
+$cWhite: white;
+
+
+input:focus {
+    outline: 0px !important;
+    box-shadow: none !important;
+}
+
+.card-text {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
